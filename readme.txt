@@ -12,6 +12,9 @@ BML(Be-Music Longnote) - 국산 리듬게임인 Ez2Dj와 같이 롱노트를 지
 PMS(Pop'n Music Script) - 코나미의 팝픈뮤직(Pop'n Music)과 같이 9키를 사용하는 데이터
 
 
+BM98의 제작자인 Urao Yane씨가 작성한 BMS 파일 포맷에 대한 원본 명세를 보시려면 http://bm98.yaneu.com/bm98/bmsformat.html (영어)를 참고하세요.
+
+
 이 파일을 사용하기 위해서는:
 
 - 호스팅 서버에 PHP 5.x 버전이 세팅되어 있어야 합니다.
