@@ -233,16 +233,20 @@ class BMS_Parser{
  function listDatafiles(){
   rewind($this->handle);
   $data=array();
+  $data["number_keysounds"]=0;
+  $data["number_images"]=0;
   while(($parsing=fgets($this->handle)) !== false){
    $param=str_replace("#","",strstr($parsing," ",true));
    if(preg_match("/^(WAV)([A-Za-z0-9]{2})$/i",$param)){
     $soundid=substr($param,3,2);
     $soundname=trim(strstr($parsing," "));
     $data["keysounds"][$soundid]=$soundname;
+    $data["number_keysounds"]++;
    }elseif(preg_match("/^(BMP)([A-Za-z0-9]{2})$/i",$param)){
     $imageid=substr($param,3,2);
     $imagename=trim(strstr($parsing," "));
     $data["images"][$imageid]=$imagename;
+    $data["number_images"]++;
    }
   }
   return $data;
