@@ -1,7 +1,7 @@
 <?php
 include "bmsparser_class.php";
 
-$bmsclass=new BMS_Reader("example-files/entrance.bms");
+$bmsclass=new BMS_Parser("example-files/example.bms");
 
 $metadata=$bmsclass->parseMetadata();
 $numnotes=$bmsclass->numNotes();
