@@ -1,4 +1,4 @@
-﻿- BMS_Parser Class for PHP - 
+﻿- BMS_Reader Class for PHP - 
 
 Made by nandarous (themunyang21 앳 nate.com)
 
