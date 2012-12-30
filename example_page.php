@@ -5,6 +5,7 @@ $bmsclass=new BMS_Parser("example-files/example.bme");
 
 $metadata=$bmsclass->parseMetadata();
 $numnotes=$bmsclass->numNotes();
+$usedkeys=$bmsclass->keysUsed();
 $datafiles=$bmsclass->listDatafiles();
 
 $rawoutput=$_GET["rawoutput"];
@@ -50,7 +51,7 @@ if($rawoutput != 1){
 <table width="573" style="border: 1px solid; font-size: 12px;">
  <tr>
   <td width="30%">Play Type</td>
-  <td width="70%"><?=$metadata["playtype"]["name"]?> (Raw: <?=$metadata["playtype"]["id"]?>)</td>
+  <td width="70%"><?=$metadata["playtype"]["name"]?> (<?=$usedkeys?>keys, raw=<?=$metadata["playtype"]["id"]?>)</td>
  </tr>
  <tr>
   <td width="30%">Music Genre</td>
@@ -74,7 +75,7 @@ if($rawoutput != 1){
  </tr>
  <tr>
   <td width="30%">Judge Rank</td>
-  <td width="70%"><?=$metadata["rank"]["name"]?> (Raw: <?=$metadata["rank"]["id"]?>)</td>
+  <td width="70%"><?=$metadata["rank"]["name"]?> (raw=<?=$metadata["rank"]["id"]?>)</td>
  </tr>
  <tr>
   <td width="30%">Number of Keysounds</td>
