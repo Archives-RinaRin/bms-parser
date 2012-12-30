@@ -1,5 +1,5 @@
 <?php
-// A Be-Music Source(BMS) File Parser for PHP by desirous.Blue (http://anoldstory.egloos.com)
+// A Be-Music Source(BMS) File Parser for PHP by nandarous (http://anoldstory.egloos.com)
 // Version 0.1 (2012.2.9). Last Changed: 2012.12.30
 // This code is licensed under GNU Lesser General Public License (GNU LGPL) or a BSD-style licenses.
 // for texts of the license, please see http://www.gnu.org/licenses/lgpl.html
@@ -9,7 +9,7 @@
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
 class BMS_Reader{
- const BR_VERSION="0.1.9.7";
+ const BR_VERSION="0.1.9.8";
 
  // Directives for basic information (metadatas)
  const B_PLAYTYPE="PLAYER"; // Play mode
