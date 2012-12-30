@@ -1,12 +1,15 @@
 <?php
 include "bmsparser_class.php";
 
-$bmsclass=new BMS_Parser("example-files/example.bms");
+$bmsclass=new BMS_Parser("example-files/example.bme");
 
 $metadata=$bmsclass->parseMetadata();
 $numnotes=$bmsclass->numNotes();
 $datafiles=$bmsclass->listDatafiles();
 
+$rawoutput=$_GET["rawoutput"];
+
+if($rawoutput != 1){
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
@@ -88,3 +91,11 @@ $datafiles=$bmsclass->listDatafiles();
 </table>
 </body>
 </html>
+<? }elseif($rawoutput == 1){ ?>
+<pre>
+<?php
+$overallinfo=$bmsclass->buildOverallInfo();
+print_r($overallinfo);
+?>
+</pre>
+<? } ?>
