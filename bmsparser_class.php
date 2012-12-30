@@ -8,8 +8,8 @@
 // this code supports all variant of Be-Music Source File formats: BMS (the standard), BME (for 7/14 keys like Beatmania IIDX), BML (for 'long-notes' like Ez2DJ), PMS (for Pop'n Music like games).
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
-class BMS_Reader{
- const BR_VERSION="0.1.9.7";
+class BMS_Parser{
+ const BR_VERSION="0.1.9.8";
 
  // Directives for basic information (metadatas)
  const B_PLAYTYPE="PLAYER"; // Play mode
