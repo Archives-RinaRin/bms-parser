@@ -1,6 +1,8 @@
 <?php
 include "bmsparser_class.php";
 
+error_reporting(E_ALL ^ E_NOTICE);
+
 $bmsclass=new BMS_Parser("example-files/example.bme");
 
 $metadata=$bmsclass->parseMetadata();
@@ -37,7 +39,7 @@ if($rawoutput != 1){
  </tr>
  <tr>
   <td width="30%">MD5</td>
-  <td width="70%"><?=$metadata["filehash"]?></td>
+  <td width="70%"><?=$metadata["filehash"]?> (<a href="http://www.dream-pro.info/~lavalse/LR2IR/search.cgi?mode=ranking&amp;bmsmd5=<?=$metadata["filehash"];?>">Info on LR2IR</a>)</td>
  </tr>
  <tr>
   <td width="30%">File Type</td>
