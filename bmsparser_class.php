@@ -1,6 +1,6 @@
 <?php
 // A Be-Music Source(BMS) File Parser for PHP by nandarous (themunyang21 at nate dot com)
-// Version 0.2 (2013.1.2). Last Changed: 2013.1.2
+// Version 0.2 (2013.1.2). Last Changed: 2013.1.4
 // This code is licensed under GNU Lesser General Public License (GNU LGPL) or a BSD-style licenses.
 // for texts of the license, please see http://www.gnu.org/licenses/lgpl.html
 // This code requires that your webhosting provider must support PHP Version 5.
@@ -9,7 +9,7 @@
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
 class BMS_Parser{
- const BP_VERSION="0.2.0.0a";
+ const BP_VERSION="0.2.0.0";
 
  // Directives for basic information (metadatas)
  const B_PLAYTYPE="PLAYER"; // Play mode
@@ -170,6 +170,7 @@ class BMS_Parser{
     $track=substr($param_id,0,3);
     $channel=substr($param_id,3,2);
     $messages=trim(strstr($parsing,":"),":");
+    $messages=trim($messages);
     if(strlen($messages) % 2 == 1){
      trigger_error("Illegal message length was detected at channel #${channel} in track #${track}. The message will be excepted from calculation.",E_USER_NOTICE);
      continue;
