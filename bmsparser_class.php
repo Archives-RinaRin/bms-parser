@@ -9,7 +9,7 @@
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
 class BMS_Parser{
- const BP_VERSION="0.2.0.2a";
+ const BP_VERSION="0.2.0.2";
 
  // Directives for basic information (metadatas)
  const B_PLAYTYPE="PLAYER"; // Play mode
@@ -71,7 +71,6 @@ class BMS_Parser{
   rewind($this->handle);
   while(($parsing=fgets($this->handle)) !== false){
    $parameter=strstr($parsing," ",true);
-   //$parameter=str_replace("#","",$parameter);
    $parameter=ltrim($parameter,"#");
    $parameter=strtoupper($parameter);
    
@@ -164,6 +163,15 @@ class BMS_Parser{
   $notes=0;
   rewind($this->handle);
   while(($parsing=fgets($this->handle)) !== false && !feof($this->handle)){
+   $lparameter=strstr($parsing," ",true);
+   $lparameter=ltrim($lparameter,"#");
+   $lparameter=strtoupper($lparameter);
+   $lvalue=strstr($parsing," ");
+   $lvalue=trim($lvalue);
+   if(($lparameter == "LNOBJ") && (base_convert($lvalue,36,10) >= 1)){
+    $isrdm2=true;
+    $lnmessage=$lvalue;
+   }
    $param_id=strstr($parsing,":",true);
    $param_id=ltrim($param_id,"#");
    if(preg_match("/^([0-9]{5})$/",$param_id)){
@@ -172,19 +180,24 @@ class BMS_Parser{
     $messages=trim(strstr($parsing,":"),":");
     $messages=trim($messages);
     $normalnotes=(intval($channel) >= 11 && intval($channel) <= 29);
-    $longnotes=(intval($channel) >= 51 && intval($channel) <= 69);
+    $longnotes=(intval($channel) >= 51 && intval($channel) <= 69) ;
     if((strlen($messages) % 2 == 1) && ($normalnotes || $longnotes)){
      trigger_error("Illegal message length was detected at channel #${channel} in track #${track}. The message will be excepted from calculation.",E_USER_NOTICE);
      continue;
-    }
+     }
     $eachmsg=str_split($messages,2);
     $size=count($eachmsg);
     if($normalnotes || $longnotes){
      $i=0;
      for($i=1;$i<=$size;$i++){
       if(intval(base_convert($eachmsg[$i-1],36,10)) >= 1){
-       if($normalnotes){$notes++;}
-       elseif($longnotes){$notes+=0.5;} // for long-notes
+       if($normalnotes){
+        if($isrdm2 == true && $eachmsg[$i-1] == $lnmessage){$notes+=0;}
+        else{$notes++;}
+       }elseif($longnotes){ // for long-notes
+        if($isrdm2 == true && $eachmsg[$i-1] == $lnmessage){$notes+=0;}
+        else{$notes+=0.5;}
+       }
       }
      }
     }
