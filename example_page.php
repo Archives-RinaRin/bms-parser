@@ -10,6 +10,8 @@ $numnotes=$bmsclass->numNotes();
 $usedkeys=$bmsclass->keysUsed();
 $datafiles=$bmsclass->listDatafiles();
 
+$gaugepernote=sprintf("%0.2f",$metadata["total"] / $numnotes);
+
 $rawoutput=$_GET["rawoutput"];
 
 if($rawoutput != 1){
@@ -77,7 +79,11 @@ if($rawoutput != 1){
  </tr>
  <tr>
   <td width="30%">Judge Rank</td>
-  <td width="70%"><?=$metadata["rank"]["name"]?> (raw=<?=$metadata["rank"]["id"]?>)</td>
+  <td width="70%"><?=$metadata["rank"]["name"]?> (<?=$gaugepernote?> per a note)</td>
+ </tr>
+ <tr>
+  <td width="30%">Gauge Totals</td>
+  <td width="70%"><?=$metadata["total"]?> ()</td>
  </tr>
  <tr>
   <td width="30%">Number of Keysounds</td>
