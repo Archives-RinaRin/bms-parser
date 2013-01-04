@@ -9,7 +9,7 @@
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
 class BMS_Parser{
- const BP_VERSION="0.2.0.0";
+ const BP_VERSION="0.2.0.1";
 
  // Directives for basic information (metadatas)
  const B_PLAYTYPE="PLAYER"; // Play mode
@@ -171,14 +171,14 @@ class BMS_Parser{
     $channel=substr($param_id,3,2);
     $messages=trim(strstr($parsing,":"),":");
     $messages=trim($messages);
-    if(strlen($messages) % 2 == 1){
+    $normalnotes=(intval($channel) >= 11 && intval($channel) <= 29);
+    $longnotes=(intval($channel) >= 51 && intval($channel) <= 69);
+    if((strlen($messages) % 2 == 1) && ($normalnotes || $longnotes)){
      trigger_error("Illegal message length was detected at channel #${channel} in track #${track}. The message will be excepted from calculation.",E_USER_NOTICE);
      continue;
     }
     $eachmsg=str_split($messages,2);
     $size=count($eachmsg);
-    $normalnotes=(intval($channel) >= 11 && intval($channel) <= 29);
-    $longnotes=(intval($channel) >= 51 && intval($channel) <= 69);
     if($normalnotes || $longnotes){
      $i=0;
      for($i=1;$i<=$size;$i++){
