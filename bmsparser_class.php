@@ -179,12 +179,12 @@ class BMS_Parser{
     $channel=substr($param_id,3,2);
     $messages=trim(strstr($parsing,":"),":");
     $messages=trim($messages);
-    $normalnotes=(intval($channel) >= 11 && intval($channel) <= 29);
-    $longnotes=(intval($channel) >= 51 && intval($channel) <= 69) ;
+    $normalnotes=(intval($channel) >= 11 && intval($channel) < 30);
+    $longnotes=(intval($channel) >= 51 && intval($channel) < 70) ;
     if((strlen($messages) % 2 == 1) && ($normalnotes || $longnotes)){
      trigger_error("Illegal message length was detected at channel #${channel} in track #${track}. The message will be excepted from calculation.",E_USER_NOTICE);
      continue;
-     }
+    }
     $eachmsg=str_split($messages,2);
     $size=count($eachmsg);
     if($normalnotes || $longnotes){
