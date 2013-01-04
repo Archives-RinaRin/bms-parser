@@ -9,7 +9,7 @@
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
 class BMS_Parser{
- const BP_VERSION="0.2.0.1";
+ const BP_VERSION="0.2.0.2a";
 
  // Directives for basic information (metadatas)
  const B_PLAYTYPE="PLAYER"; // Play mode
@@ -39,7 +39,7 @@ class BMS_Parser{
  const LN_DP14KEYS=69;
  
  var $mixlevels=array(1 => "BASIC",2 => "NORMAL",3 => "HYPER",4 => "ANOTHER",5 => "INSANE");
- var $play_types=array(1 => "Single",2 => "Two",3 => "Double / 9 keys");
+ var $play_types=array(1 => "Single",2 => "Two",3 => "Double");
  var $brief_ranks=array(0 => "Very Hard",1 => "Hard",2 => "Normal",3 => "Easy");
  
  // the constructor
