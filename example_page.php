@@ -79,11 +79,11 @@ if($rawoutput != 1){
  </tr>
  <tr>
   <td width="30%">Judge Rank</td>
-  <td width="70%"><?=$metadata["rank"]["name"]?> (<?=$gaugepernote?> per a note)</td>
+  <td width="70%"><?=$metadata["rank"]["name"]?> (raw=<?=$metadata["rank"]["id"]?>)</td>
  </tr>
  <tr>
   <td width="30%">Gauge Totals</td>
-  <td width="70%"><?=$metadata["total"]?> ()</td>
+  <td width="70%"><?=$metadata["total"]?> (<?=$gaugepernote?> per a note)</td>
  </tr>
  <tr>
   <td width="30%">Number of Keysounds</td>
