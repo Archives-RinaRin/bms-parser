@@ -9,7 +9,7 @@
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
 class BMS_Parser{
- const BP_VERSION="0.2.0.2";
+ const BP_VERSION="0.2.0.3";
 
  // Directives for basic information (metadatas)
  const B_PLAYTYPE="PLAYER"; // Play mode
@@ -189,13 +189,13 @@ class BMS_Parser{
     $size=count($eachmsg);
     if($normalnotes || $longnotes){
      $i=0;
-     for($i=1;$i<=$size;$i++){
-      if(intval(base_convert($eachmsg[$i-1],36,10)) >= 1){
+     for($i=0;$i<=$size;$i++){
+      if(intval(base_convert($eachmsg[$i],36,10)) >= 1){
        if($normalnotes){
-        if($isrdm2 == true && $eachmsg[$i-1] == $lnmessage){$notes+=0;}
+        if($isrdm2 == true && $eachmsg[$i] == $lnmessage){$notes+=0;}
         else{$notes++;}
        }elseif($longnotes){ // for long-notes
-        if($isrdm2 == true && $eachmsg[$i-1] == $lnmessage){$notes+=0;}
+        if($isrdm2 == true && $eachmsg[$i] == $lnmessage){$notes+=0;}
         else{$notes+=0.5;}
        }
       }
