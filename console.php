@@ -42,5 +42,4 @@ Gauge Total: {$metadatas["total"]} ({$gaugepernote}% per a note)
 Number of Sound datas: {$datafiles["number_keysounds"]}
 Number of Images: {$datafiles["number_images"]}
 END;
-
 ?>
