@@ -23,6 +23,8 @@ class BMS_Parser{
  const B_MIXLEVEL="DIFFICULTY"; // Display difficulty name
  const B_DET_RANK="DEFEXRANK"; // Judge Rank (detailed)
  const B_BGMFILE="MIDIFILE"; // Name of Background Music file
+ const B_JACKETFILE="STAGEFILE"; // Name of Title Image file.
+ const B_BGAFILE="VIDEOFILE"; // Name of BGA video file.
  const B_VOLUME="VOLWAV"; // Sound Volume
  
  // Maximum channel numbers
@@ -98,6 +100,14 @@ class BMS_Parser{
    $data["bgmfile"]=$value; 
    $flagsfound++;
    break;
+   case self::B_JACKETFILE:
+   $data["titleimage"]=$value;
+   $flagsfound++;
+   break;
+   case self::B_BGAFILE:
+   $data["bgafile"]=$value;
+   $flagsfound++;
+   break;
    case self::B_VOLUME:
    if(!is_numeric($value) || empty($value)){
    $data["volume"]=100;
@@ -171,6 +181,7 @@ class BMS_Parser{
    $lparameter=strtoupper($lparameter);
    $lvalue=strstr($parsing," ");
    $lvalue=trim($lvalue);
+   // check whether the file uses "RDM Type-2" long-note scheme
    if(($lparameter == "LNOBJ") && (base_convert($lvalue,36,10) >= 1)){
     $isrdm2=true;
     $lnmessage=$lvalue;
