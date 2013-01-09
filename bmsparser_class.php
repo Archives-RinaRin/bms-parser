@@ -1,6 +1,6 @@
 <?php
 // A Be-Music Source(BMS) File Parser for PHP by nandarous (themunyang21 at nate dot com)
-// Version 0.2 (2013.1.2). Last Changed: 2013.1.4
+// Version 0.2 (2013.1.2). Last Changed: 2013.1.9
 // This code is licensed under GNU Lesser General Public License (GNU LGPL) or a BSD-style licenses.
 // for texts of the license, please see http://www.gnu.org/licenses/lgpl.html
 // This code requires that your webhosting provider must support PHP Version 5.
@@ -9,7 +9,7 @@
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
 class BMS_Parser{
- const BP_VERSION="0.2.0.3";
+ const BP_VERSION="0.2.0.4";
 
  // Directives for basic information (metadatas)
  const B_PLAYTYPE="PLAYER"; // Play mode
@@ -48,7 +48,10 @@ class BMS_Parser{
   */
  function __construct($path){
   $this->path=$path;
-  $this->handle=fopen($this->path,"r");
+  if(!file_exists($this->path)){throw new Exception("File not exists!");}
+  $this->handle=@fopen($this->path,"r");
+  // If the file is not accessible, then throws an exception.
+  if(!is_resource($this->handle)){throw new Exception("Cannot open the file.");}
  }
  
  // parseMetadata(): reads a metadata from the file.
