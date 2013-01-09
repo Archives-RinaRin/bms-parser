@@ -1,4 +1,5 @@
 <?php
+// This script is the script for command console.
 if(!empty($_SERVER["REQUEST_METHOD"])){
 ?>
 <pre>
@@ -11,7 +12,7 @@ Usage: php <?=basename($_SERVER["SCRIPT_NAME"])?> &lt;filepath&gt;
 
 require "bmsparser_class.php";
 
-if(empty($argv) || !file_exists($argv[1])){exit;}
+if(empty($argv)){exit;}
 
 $bmsclass=new BMS_Parser($argv[1]);
 
@@ -34,6 +35,7 @@ Play type: {$metadatas["playtype"]["name"]} ({$usedkeys} keys)
 Music Genre: {$metadatas["genre"]}
 Music Title: {$metadatas["title"]}
 Music Artist: {$metadatas["artist"]}
+Title Image Filename: {$metadatas["titleimage"]}
 BPM (Tempo): {$metadatas["bpm"]}
 Playlevel: {$metadatas["plevel"]}
 Judge Rank: {$metadatas["rank"]["name"]} (raw={$metadatas["rank"]["id"]})
