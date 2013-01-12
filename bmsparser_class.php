@@ -9,13 +9,14 @@
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
 class BMS_Parser{
- const BP_VERSION="0.2.0.5";
+ const BP_VERSION="0.2.1.0";
 
  // Directives for basic information (metadatas)
  const B_PLAYTYPE="PLAYER"; // Play mode
  const B_MUSIC_GENRE="GENRE"; // Music genre
  const B_SCORE_TITLE="TITLE"; // Music title
  const B_MUSIC_ARTIST="ARTIST"; // Music Artist
+ const B_MUSIC_COARTIST="SUBARTIST"; // Music co-artist
  const B_MUSIC_BPM="BPM"; // BPM (Beats Per Minute)
  const B_SCORE_LEVEL="PLAYLEVEL"; // Playing Difficulty
  const B_BRIEF_RANK="RANK"; // Judge Level
@@ -26,6 +27,8 @@ class BMS_Parser{
  const B_JACKETFILE="STAGEFILE"; // Name of Title Image file.
  const B_BGAFILE="VIDEOFILE"; // Name of BGA video file.
  const B_VOLUME="VOLWAV"; // Sound Volume
+
+ const S_RANDOMIZED="RANDOM"; // main directive for randomized score
  
  // Maximum channel numbers
  const SP5KEYS=16; // Single Play (5 keys) / 11~15: Keys 1~5, 16: SC
@@ -39,7 +42,7 @@ class BMS_Parser{
  const LN_DP9KEYS=65;
  const LN_DP10KEYS=66;
  const LN_DP14KEYS=69;
- 
+
  var $mixlevels=array(1 => "BASIC",2 => "NORMAL",3 => "HYPER",4 => "ANOTHER",5 => "INSANE");
  var $play_types=array(1 => "Single",2 => "Two",3 => "Double");
  var $brief_ranks=array(0 => "Very Hard",1 => "Hard",2 => "Normal",3 => "Easy");
@@ -73,6 +76,7 @@ class BMS_Parser{
   $data["filesize"]=filesize(realpath($this->path));
   $data["filehash"]=md5_file(realpath($this->path));
   $data["fileex"]=end(explode(".",basename($this->path)));
+  $data["randomized"]=false;
   rewind($this->handle);
   while(($parsing=fgets($this->handle)) !== false){
    $parameter=strstr($parsing," ",true);
@@ -115,8 +119,12 @@ class BMS_Parser{
    }else{$data["volume"]=(float)$value;}
    $flagsfound++;
    break;
-   case self::B_MUSIC_ARTIST:
+   case self::B_MUSIC_ARTIST: // main artist(s)
    $data["artist"]=$value; 
+   $flagsfound++;
+   break;
+   case self::B_MUSIC_COARTIST: // co-artist(s)
+   $data["artist"].=" ".$value;
    $flagsfound++;
    break;
    case self::B_MUSIC_BPM:
@@ -153,6 +161,10 @@ class BMS_Parser{
    case self::B_DET_RANK:
    $data["decrank"]=$value; 
    $flagsfound++;
+   break;
+   case self::S_RANDOMIZED: // case of randomized score
+   $data["randomized"]=true;
+   $data["additional_infos"][0x80]="This score is randomized.";
    break;
    default:
    break;
