@@ -21,6 +21,14 @@ $numnotes=$bmsclass->numNotes();
 $usedkeys=$bmsclass->keysUsed();
 $datafiles=$bmsclass->listDatafiles();
 
+$additional_infos="";
+
+foreach($metadatas["additional_infos"] as $code => $desc){
+ $additional_infos.="Code ${code}: ${desc} \n";
+}
+
+
+
 $gaugepernote=sprintf("%0.2f",$metadatas["total"] / $numnotes);
 
 print <<<END
@@ -43,5 +51,8 @@ Number of notes: {$numnotes}
 Gauge Total: {$metadatas["total"]} ({$gaugepernote}% per a note)
 Number of Sound datas: {$datafiles["number_keysounds"]}
 Number of Images: {$datafiles["number_images"]}
+
+======= Additional Notes =======
+{$additional_infos}
 END;
 ?>
