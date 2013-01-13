@@ -9,7 +9,7 @@
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
 class BMS_Parser{
- const BP_VERSION="0.2.1.0";
+ const BP_VERSION="0.2.1.1a";
 
  // Directives for basic information (metadatas)
  const B_PLAYTYPE="PLAYER"; // Play mode
@@ -140,8 +140,8 @@ class BMS_Parser{
    $flagsfound++;
    break;
    case self::B_BRIEF_RANK:
-   if(empty($value) || !is_numeric($value)){
-   $data["rank"]["id"]=0;
+   if(!is_numeric($value)){
+   $data["rank"]["id"]=-1;
    $data["rank"]["name"]="Unknown";
    $data["warning"][++$i]="Judge Level is not set.";
    }else{
