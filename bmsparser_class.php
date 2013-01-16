@@ -247,7 +247,7 @@ class BMS_Parser{
     $channel_id=substr($ch_params,3,2);
     $standardnotes=($channel_id >= 11 && $channel_id < 30);
     $longnotes=($channel_id >= 51 && $channel_id < 70);
-    if($standardnotes){$buffers[]=(int)$channel_id;}
+    if($standardnotes || $longnotes){$buffers[]=(int)$channel_id;}
    }
   }
   $chnum_max=max($buffers);
