@@ -1,6 +1,6 @@
 <?php
 // A Be-Music Source(BMS) File Parser for PHP by nandarous (themunyang21 at nate dot com)
-// Version 0.2 (2013.1.2). Last Changed: 2013.1.12
+// Version 0.2 (2013.1.2). Last Changed: 2013.1.18
 // This code is licensed under GNU Lesser General Public License (GNU LGPL) or a BSD-style licenses.
 // for texts of the license, please see http://www.gnu.org/licenses/lgpl.html
 // This code requires that your webhosting provider must support PHP Version 5.
@@ -9,7 +9,7 @@
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
 class BMS_Parser{
- const BP_VERSION="0.2.1.1";
+ const BP_VERSION="0.2.1.2";
 
  // Directives for basic information (metadatas)
  const B_PLAYTYPE="PLAYER"; // Play mode
@@ -299,16 +299,39 @@ class BMS_Parser{
   }
   return $data;
  }
+ // array listBPMs(): gets values of all BPMs defined in the file.
+ /**
+  * @return array $data
+  */
+ function listBPMs(){
+  rewind($this->handle);
+  $data=array();
+  $data["number_bpms"]=0;
+  while(($parsing=fgets($this->handle)) !== false){
+   $param=ltrim(strstr($parsing," ",true),"#");
+   if(preg_match("/^(BPM)([A-Za-z0-9]{2})$/i",$param)){
+    $bpmid=substr($param,3,2);
+    $bpmvalue=trim(strstr($parsing," "));
+    $data["bpms"][$bpmid]=$bpmvalue;
+    $data["number_bpms"]++;
+   }
+  }
+  $data["maxbpm"]=max($data);
+  $data["minbpm"]=min($data);
+  return $data;
+ }
+
  // array buildOverallInfo(): gets merged result of remaining methods in this class.
  function buildOverallInfo(){
   $metadata=$this->parseMetadata();
   $numnotes=$this->numNotes();
   $keysused=$this->keysUsed();
   $list_datas=$this->listDatafiles();
+  $list_bpms=$this->listBPMs();
 
   $keysnotes=array("used_keys" => $keysused,"num_notes" => $numnotes);
 
-  return array_merge($metadata,$keysnotes,$list_datas);
+  return array_merge($metadata,$keysnotes,$list_bpms,$list_datas);
  }
 }
 ?>
