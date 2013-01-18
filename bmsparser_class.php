@@ -9,7 +9,7 @@
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
 class BMS_Parser{
- const BP_VERSION="0.2.1.2";
+ const BP_VERSION="0.2.1.3";
 
  // Directives for basic information (metadatas)
  const B_PLAYTYPE="PLAYER"; // Play mode
@@ -316,8 +316,8 @@ class BMS_Parser{
     $data["number_bpms"]++;
    }
   }
-  $data["maxbpm"]=max($data);
-  $data["minbpm"]=min($data);
+  $data["maxbpm"]=max($data["bpms"]);
+  $data["minbpm"]=min($data["bpms"]);
   return $data;
  }
 
