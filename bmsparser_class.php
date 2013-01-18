@@ -316,8 +316,10 @@ class BMS_Parser{
     $data["number_bpms"]++;
    }
   }
+  if(count($data["bpms"]) != 0){
   $data["maxbpm"]=max($data["bpms"]);
   $data["minbpm"]=min($data["bpms"]);
+  }
   return $data;
  }
 
