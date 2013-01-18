@@ -9,7 +9,7 @@
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
 class BMS_Parser{
- const BP_VERSION="0.2.1.4a";
+ const BP_VERSION="0.2.1.4";
 
  // Directives for basic information (metadatas)
  const B_PLAYTYPE="PLAYER"; // Play mode
@@ -309,6 +309,8 @@ class BMS_Parser{
   rewind($this->handle);
   $data=array();
   $data["number_bpms"]=0;
+  $metadata=$this->parseMetadata();
+  $data["bpms"]["basebpm"]=$metadata["bpm"];
   while(($parsing=fgets($this->handle)) !== false){
    $param=ltrim(strstr($parsing," ",true),"#");
    if(preg_match("/^(BPM)([A-Za-z0-9]{2})$/i",$param)){
