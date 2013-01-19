@@ -1,6 +1,6 @@
 <?php
 // A Be-Music Source(BMS) File Parser for PHP by nandarous (themunyang21 at nate dot com)
-// Version 0.2 (2013.1.2). Last Changed: 2013.1.19
+// Version 0.2 (2013.1.2). Last Changed: 2013.1.20
 // This code is licensed under GNU Lesser General Public License (GNU LGPL) or a BSD-style licenses.
 // for texts of the license, please see http://www.gnu.org/licenses/lgpl.html
 // This code requires that your webhosting provider must support PHP Version 5.
@@ -9,7 +9,7 @@
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
 class BMS_Parser{
- const BP_VERSION="0.2.2.0";
+ const BP_VERSION="0.2.2.1a";
 
  // Directives for basic information (metadatas)
  const B_PLAYTYPE="PLAYER"; // Play mode
@@ -339,7 +339,7 @@ class BMS_Parser{
     }
    }
   }
-  if(count($data["bpms"]) != 0 || count($data["seqbpms"]) != 0){
+  if(count($data["bpms"]) > 0 && count($data["seqbpms"]) > 0){
   $temp=array_merge($data["bpms"],$data["seqbpms"]);
   $data["maxbpm"]=max($temp);
   $data["minbpm"]=min($temp);
