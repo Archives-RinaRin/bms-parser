@@ -1,6 +1,6 @@
 <?php
 // A Be-Music Source(BMS) File Parser for PHP by nandarous (themunyang21 at nate dot com)
-// Version 0.2 (2013.1.2). Last Changed: 2013.1.18
+// Version 0.2 (2013.1.2). Last Changed: 2013.1.19
 // This code is licensed under GNU Lesser General Public License (GNU LGPL) or a BSD-style licenses.
 // for texts of the license, please see http://www.gnu.org/licenses/lgpl.html
 // This code requires that your webhosting provider must support PHP Version 5.
@@ -9,7 +9,7 @@
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
 class BMS_Parser{
- const BP_VERSION="0.2.1.4";
+ const BP_VERSION="0.2.2.0";
 
  // Directives for basic information (metadatas)
  const B_PLAYTYPE="PLAYER"; // Play mode
@@ -320,9 +320,29 @@ class BMS_Parser{
     $data["number_bpms"]++;
    }
   }
-  if(count($data["bpms"]) != 0){
-  $data["maxbpm"]=max($data["bpms"]);
-  $data["minbpm"]=min($data["bpms"]);
+  rewind($this->handle);
+  while(($lines=fgets($this->handle)) !== false){
+   $param_ch=ltrim(strstr($lines,":",true),"#");
+   $channel_id=substr($param_ch,3,2);
+   if(preg_match("/^([0-9]{5})$/",$param_ch)){
+    $messages=trim(strstr($lines,":"),":");
+    $rawbpms=str_split($messages,2);
+    $size=count($rawbpms);
+    if(intval($channel_id) == 3){
+     for($i=0;$i<=$size;$i++){
+      $rawbpm=hexdec($rawbpms[$i]);
+      if($rawbpm > 0){
+       $data["seqbpms"][$i]=$rawbpm;
+       $data["number_bpms"]++;
+      }else{continue;}
+     }
+    }
+   }
+  }
+  if(count($data["bpms"]) != 0 || count($data["seqbpms"]) != 0){
+  $temp=array_merge($data["bpms"],$data["seqbpms"]);
+  $data["maxbpm"]=max($temp);
+  $data["minbpm"]=min($temp);
   }
   return $data;
  }
