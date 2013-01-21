@@ -12,7 +12,7 @@ BML(Be-Music Longnote) - 국산 리듬게임인 Ez2Dj와 같이 롱노트를 지
 PMS(Pop'n Music Script) - 코나미의 팝픈뮤직(Pop'n Music)과 같이 9키를 사용하는 데이터
 
 
-BM98의 제작자인 Urao Yane씨가 작성한 BMS 파일 포맷에 대한 원본 명세를 보시려면 http://bm98.yaneu.com/bm98/bmsformat.html (영어)를 참고하세요.
+BM98의 제작자인 Urao Yane 님이 작성한 BMS 파일 포맷에 대한 원본 명세를 보시려면 http://bm98.yaneu.com/bm98/bmsformat.html (영어)를 참고하세요.
 
 
 이 파일을 사용하기 위해서는:
@@ -52,7 +52,7 @@ $[VAR_NAME]=$class->[METHOD_NAME](); 의 형식으로 호출한다.
 
 - 아직까지 압축파일 안에 담겨져 있는 BMS는 읽지 못합니다. 차후 읽을 수 있도록 수정해 나가겠습니다.
 - 아직 초기버전이라 일부 파일(특히 루브잇 전용으로 만들어진 BMS)의 정보를 제대로 읽지를 못합니다. 이 점은 차후 수정해 나가겠습니다.
-- 이 클래스는 Urao Yane 님과 BMS 플레이어 제작자들과 직접적인 관련이 없습니다.
+- 이 클래스는 Urao Yane 님과 BMS 구동기 제작자들과 직접적인 관련이 없습니다.
 
 
 저작권 정책:
