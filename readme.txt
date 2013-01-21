@@ -59,3 +59,8 @@ $[VAR_NAME]=$class->[METHOD_NAME](); 의 형식으로 호출한다.
 
 - 이 클래스는 GNU 약소 공중 사용 허가서(GNU Lesser General Public License, GNU LGPL, 2.0버전 이상) 혹은 BSD 허가서(BSD License)를 따릅니다.
 GNU LGPL 라이센스 전문(3.0버전 기준)은 http://www.gnu.org/licenses/lgpl.html 문서 (영어)를 참고해 주세요.
+
+
+Future plans:
+- BMS file highlighting
+- Visualization of BMS file's object arrangement
