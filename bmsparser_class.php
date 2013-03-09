@@ -154,7 +154,11 @@ class BMS_Parser{
    $flagsfound++;
    break;
    case self::B_PARAM_TOTAL:
-   $data["total"]=(int)$value; 
+   $data["total"]=(int)$value;
+   if(!is_numeric($value)){
+    $data["total"]=-1;
+    $data["warning"][++$i]="Gauge Total is not set.";
+   }
    $flagsfound++;
    break;
    case self::B_MIXLEVEL:
