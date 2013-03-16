@@ -1,6 +1,6 @@
 <?php
 // A Be-Music Source(BMS) File Parser for PHP by nandarous (themunyang21 at nate dot com)
-// Version 0.2 (2013.1.2). Last Changed: 2013.3.16
+// Version 0.2 (2013.1.2). Last Changed: 2013.3.17
 // This code is licensed under GNU Lesser General Public License (GNU LGPL) or a BSD-style licenses.
 // for texts of the license, please see http://www.gnu.org/licenses/lgpl.html
 // This code requires that your webhosting provider must support PHP Version 5.
@@ -9,7 +9,7 @@
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
 class BMS_Parser{
- const BP_VERSION="0.2.2.2";
+ const BP_VERSION="0.2.2.3";
 
  // Directives for basic information (metadatas)
  const B_PLAYTYPE="PLAYER"; // Play mode
@@ -45,8 +45,6 @@ class BMS_Parser{
  // For BM98
  const APP1_SP5KEYS=15;
  const APP2_SP5KEYS=17; // Pedal-1
- const APP3_SP5KEYS=25;
- const APP4_SP5KEYS=27; // Pedal-2
 
  var $mixlevels=array(1 => "BASIC",2 => "NORMAL",3 => "HYPER",4 => "ANOTHER",5 => "INSANE");
  var $play_types=array(1 => "Single",2 => "Two",3 => "Double");
@@ -263,8 +261,6 @@ class BMS_Parser{
    case self::LN_SP5KEYS:
    case self::APP1_SP5KEYS: // For Free Zone and FP
    case self::APP2_SP5KEYS:
-   case self::APP3_SP5KEYS:
-   case self::APP4_SP5KEYS:
    $keystype=5; break;
    case self::SP7KEYS: 
    case self::LN_SP7KEYS:
