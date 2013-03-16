@@ -9,7 +9,7 @@
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
 class BMS_Parser{
- const BP_VERSION="0.2.2.3";
+ const BP_VERSION="0.2.2.4";
 
  // Directives for basic information (metadatas)
  const B_PLAYTYPE="PLAYER"; // Play mode
@@ -55,6 +55,10 @@ class BMS_Parser{
   * @param $path
   */
  function __construct($path){
+  if(version_compare(PHP_VERSION,"5.0.0") < 0){
+   print "The ".__CLASS__." class requires PHP 5.0.x or higher. you are running version ".PHP_VERSION." of PHP.";
+   return false;
+  }
   $this->path=$path;
   if(!file_exists($this->path)){throw new Exception("File not exists!");}
   $this->handle=@fopen($this->path,"r");
