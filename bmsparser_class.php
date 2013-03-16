@@ -1,6 +1,6 @@
 <?php
 // A Be-Music Source(BMS) File Parser for PHP by nandarous (themunyang21 at nate dot com)
-// Version 0.2 (2013.1.2). Last Changed: 2013.1.20
+// Version 0.2 (2013.1.2). Last Changed: 2013.3.16
 // This code is licensed under GNU Lesser General Public License (GNU LGPL) or a BSD-style licenses.
 // for texts of the license, please see http://www.gnu.org/licenses/lgpl.html
 // This code requires that your webhosting provider must support PHP Version 5.
@@ -261,8 +261,10 @@ class BMS_Parser{
   switch($chnum_max){
    case self::SP5KEYS:
    case self::LN_SP5KEYS:
-   case self::APP1_SP5KEYS: // For BM98
+   case self::APP1_SP5KEYS: // For Free Zone and FP
    case self::APP2_SP5KEYS:
+   case self::APP3_SP5KEYS:
+   case self::APP4_SP5KEYS:
    $keystype=5; break;
    case self::SP7KEYS: 
    case self::LN_SP7KEYS:
