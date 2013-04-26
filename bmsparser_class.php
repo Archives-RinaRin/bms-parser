@@ -1,6 +1,6 @@
 <?php
 // A Be-Music Source(BMS) File Parser for PHP by nandarous (themunyang21 at nate dot com)
-// Version 0.2 (2013.1.2). Last Changed: 2013.4.14
+// Version 0.2 (2013.1.2). Last Changed: 2013.4.26
 // This code is licensed under GNU Lesser General Public License (GNU LGPL) or a BSD-style licenses.
 // for texts of the license, please see http://www.gnu.org/licenses/lgpl.html
 // This code requires that your webhosting provider must support PHP Version 5.
@@ -9,7 +9,7 @@
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
 class BMS_Parser{
- const BP_VERSION="0.2.3.0";
+ const BP_VERSION="0.2.4.0";
 
  // Directives for basic information (metadatas)
  const B_PLAYTYPE="PLAYER"; // Play mode
@@ -49,7 +49,11 @@ class BMS_Parser{
  const RP_SINGLEPLAY=21;
  const RP_SP5KEYS=26; // Single Play (5 keys) / 21~25: Keys 1~5, 26: SC
  const RP_SP7KEYS=29; // Single Play (7 keys) / 21~25: Keys 1~5, 26: SC, 28~29: Keys 6~7
-
+ // Channel number for scratch notes
+ const SCR_LEFT=16;
+ const SCR_RIGHT=26;
+ const LN_SCR_LEFT=56;
+ const LN_SCR_RIGHT=66;
 
  var $mixlevels=array(1 => "BASIC",2 => "NORMAL",3 => "HYPER",4 => "ANOTHER",5 => "INSANE");
  var $play_types=array(1 => "Single",2 => "Two",3 => "Double");
@@ -195,11 +199,12 @@ class BMS_Parser{
   return $data;
  }
 
- // numNotes(): calculate number of notes from the file. 
+ // numNotes( bool $scrnotes ): calculate number of notes from the file. 
  /**
+  * @param bool $scrnotes
   * @return int $notes
   */
- function numNotes(){
+ function numNotes($scrnotes=false){
   $data=array();
   $notes=0;
   rewind($this->handle);
@@ -233,12 +238,24 @@ class BMS_Parser{
      $i=0;
      for($i=0;$i<=$size;$i++){
       if(intval(base_convert($eachmsg[$i],36,10)) >= 1){
-       if($normalnotes){
-        if($isrdm2 == true && $eachmsg[$i] == $lnmessage){$notes+=0;}
-        else{$notes++;}
-       }elseif($longnotes){ // for long-notes
-        if($isrdm2 == true && $eachmsg[$i] == $lnmessage){$notes+=0;}
-        else{$notes+=0.5;}
+      if($scrnotes == true){ // Scratch Notes
+       $is_scrchannel=($channel == self::SCR_LEFT || $channel == self::SCR_RIGHT);
+       $is_lnscrchannel=($channel == self::LN_SCR_LEFT || $channel == self::LN_SCR_RIGHT);
+        if($normalnotes && $is_scrchannel){
+         if($isrdm2 == true && $eachmsg[$i] == $lnmessage){$notes+=0;}
+         else{$notes++;}
+        }elseif($longnotes && $is_lnscrchannel){ // for long-notes
+         if($isrdm2 == true && $eachmsg[$i] == $lnmessage){$notes+=0;}
+         else{$notes+=0.5;}
+        }
+       }else{ // All Notes
+        if($normalnotes){
+         if($isrdm2 == true && $eachmsg[$i] == $lnmessage){$notes+=0;}
+         else{$notes++;}
+        }elseif($longnotes){ // for long-notes
+         if($isrdm2 == true && $eachmsg[$i] == $lnmessage){$notes+=0;}
+         else{$notes+=0.5;}
+        }
        }
       }
      }
