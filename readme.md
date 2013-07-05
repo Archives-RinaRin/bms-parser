@@ -37,7 +37,8 @@ BM98의 제작자인 Urao Yane 님이 작성한 BMS 파일 포맷에 대한 원�
 
 사용 방법의 예:
 ==
-`$class=new BMS_Parser("[열고자 하는 파일이름]");`
+`$class=new BMS_Parser("[열고자 하는 파일 경로]");`
+
 `$(변수 이름)=$class->(메서드 이름)();` 의 형식으로 호출한다.
 
 이 클래스에 대한 문의사항이 있으면 themunyang21@nate.com로 메일을 보내거나 트위터 @nandarous로 멘션을 보내주시기 바랍니다.
