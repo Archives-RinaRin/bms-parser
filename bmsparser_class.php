@@ -9,7 +9,7 @@
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
 class BMS_Parser{
- const BP_VERSION="0.2.4.2";
+ const BP_VERSION="0.2.4.3";
 
  // Directives for basic information (metadatas)
  const B_PLAYTYPE="PLAYER"; // Play mode
@@ -189,7 +189,7 @@ class BMS_Parser{
    default:
    break;
    }
-   if(preg_match("/^(STOP)([A-Za-z0-9]{2})$/i",$parameter){
+   if(preg_match("/^(STOP)([A-Za-z0-9]{2})$/i",$parameter)){
    $data["contains_stop"]=true;
    $data["additional_infos"][0x40]="This score contains stop sequence";
    }
@@ -372,11 +372,11 @@ class BMS_Parser{
   while(($lines=fgets($this->handle)) !== false){
    $param_ch=ltrim(strstr($lines,":",true),"#");
    $channel_id=substr($param_ch,3,2);
-   if(intval($channel_id) == 9){
+   if(preg_match("/^([0-9]{5})$/",$param_ch)){
     $messages=trim(strstr($lines,":"),":");
     $rawbpms=str_split($messages,2);
     $size=count($rawbpms);
-    if(intval($channel_id) == 3){
+    if(intval($channel_id) == 3 || intval($channel_id) == 9){
      for($i=0;$i<=$size;$i++){
       $rawbpm=hexdec($rawbpms[$i]);
       if($rawbpm > 0){
