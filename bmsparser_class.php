@@ -9,7 +9,7 @@
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
 class BMS_Parser{
- const BP_VERSION="0.2.4.1";
+ const BP_VERSION="0.2.4.2";
 
  // Directives for basic information (metadatas)
  const B_PLAYTYPE="PLAYER"; // Play mode
@@ -372,7 +372,7 @@ class BMS_Parser{
   while(($lines=fgets($this->handle)) !== false){
    $param_ch=ltrim(strstr($lines,":",true),"#");
    $channel_id=substr($param_ch,3,2);
-   if(preg_match("/^([0-9]{5})$/",$param_ch)){
+   if(intval($channel_id) == 9){
     $messages=trim(strstr($lines,":"),":");
     $rawbpms=str_split($messages,2);
     $size=count($rawbpms);
