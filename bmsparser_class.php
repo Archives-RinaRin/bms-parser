@@ -9,7 +9,7 @@
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
 class BMS_Parser{
- const BP_VERSION="0.2.4.3";
+ const BP_VERSION="0.2.4.5b";
 
  // Directives for basic information (metadatas)
  const B_PLAYTYPE="PLAYER"; // Play mode
@@ -379,7 +379,7 @@ class BMS_Parser{
     if(intval($channel_id) == 3 || intval($channel_id) == 9){
      for($i=0;$i<=$size;$i++){
       $rawbpm=hexdec($rawbpms[$i]);
-      if($rawbpm > 0){
+      if($rawbpm >= 0){
        $data["seqbpms"][$i]=$rawbpm;
        $data["number_bpms"]++;
       }else{continue;}
