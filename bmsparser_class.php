@@ -379,7 +379,7 @@ class BMS_Parser{
     if(intval($channel_id) == 3 || intval($channel_id) == 9){
      for($i=0;$i<=$size;$i++){
       $rawbpm=hexdec($rawbpms[$i]);
-      if($rawbpm >= 0){
+      if($rawbpm > 0){
        $data["seqbpms"][$i]=$rawbpm;
        $data["number_bpms"]++;
       }else{continue;}
