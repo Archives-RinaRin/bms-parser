@@ -1,6 +1,6 @@
 <?php
 // A Be-Music Source(BMS) File Parser for PHP by nandarous (themunyang21 at nate dot com)
-// Version 0.2 (2013.1.2). Last Changed: 2013.7.9
+// Version 0.2 (2013.1.2). Last Changed: 2013.8.8
 // This code is licensed under GNU Lesser General Public License (GNU LGPL) or a BSD-style licenses.
 // for texts of the license, please see http://www.gnu.org/licenses/lgpl.html
 // This code requires that your webhosting provider must support PHP Version 5.
@@ -9,7 +9,7 @@
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
 class BMS_Parser{
- const BP_VERSION="0.2.4.5";
+ const BP_VERSION="0.2.4.6";
 
  // Directives for basic information (metadatas)
  const B_PLAYTYPE="PLAYER"; // Play mode
@@ -203,12 +203,13 @@ class BMS_Parser{
   return $data;
  }
 
- // numNotes( bool $scrnotes ): calculate number of notes from the file. 
+ // numNotes( bool $scrnotes, int $scheme ): calculate number of notes from the file. 
  /**
   * @param bool $scrnotes
+  * @param int $scheme
   * @return int $notes
   */
- function numNotes($scrnotes=false){
+ function numNotes($scrnotes=false,$scheme=0){
   $data=array();
   $notes=0;
   rewind($this->handle);
@@ -250,7 +251,10 @@ class BMS_Parser{
          else{$notes++;}
         }elseif($longnotes && $is_lnscrchannel){ // for long-notes
          if($isrdm2 == true && $eachmsg[$i] == $lnmessage){$notes+=0;}
-         else{$notes+=0.5;}
+         else{
+         if($scheme == 0){$notes+=0.5;}
+         elseif($scheme == 1){$notes+=1;} // for "charge-note" scheme (in beatmania IIDX)
+         }
         }
        }else{ // All Notes
         if($normalnotes){
@@ -258,7 +262,10 @@ class BMS_Parser{
          else{$notes++;}
         }elseif($longnotes){ // for long-notes
          if($isrdm2 == true && $eachmsg[$i] == $lnmessage){$notes+=0;}
-         else{$notes+=0.5;}
+         else{
+         if($scheme == 0){$notes+=0.5;}
+         elseif($scheme == 1){$notes+=1;}  // for "charge-note" scheme (in beatmania IIDX)
+         }
         }
        }
       }
