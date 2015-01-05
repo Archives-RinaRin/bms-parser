@@ -1,8 +1,8 @@
 BMS_Parser Class for PHP
 =
-- Made by nandarous aka. Ceruria*
+- Made by Senarin
 - Blog: http://ten-desires.pe.kr
-- Twitter: @nandarous
+- Twitter: @Rb_Senarin
 
 
 이 파일은 BMS(Be-Music Script) 파일의 정보를 읽을수 있게 해주는 PHP용 클래스입니다.
