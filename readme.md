@@ -1,7 +1,7 @@
 BMS_Parser Class for PHP
 =
 - Made by Senarin
-- Blog: http://ten-desires.pe.kr
+- Blog: http://senarin.tistory.com
 - Twitter: @Rb_Senarin
 
 
