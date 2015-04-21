@@ -9,7 +9,7 @@
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
 class BMS_Parser{
- const BP_VERSION="0.2.4.7";
+ const BP_VERSION="0.2.4.8";
 
  // Directives for basic information (metadatas)
  const B_PLAYTYPE="PLAYER"; // Play mode
@@ -18,7 +18,7 @@ class BMS_Parser{
  const B_MUSIC_ARTIST="ARTIST"; // Music Artist
  const B_MUSIC_COARTIST="SUBARTIST"; // Music co-artist
  const B_MUSIC_BPM="BPM"; // BPM (Beats Per Minute)
- const B_SCORE_LEVEL="PLAYLEVEL"; // Playing Difficulty
+ const B_SCORE_LEVEL="PLAYLEVEL"; // Playing Difficulty (for Display)
  const B_BRIEF_RANK="RANK"; // Judge Level
  const B_PARAM_TOTAL="TOTAL"; // Gauge Totals
  const B_MIXLEVEL="DIFFICULTY"; // Display difficulty name
@@ -27,6 +27,7 @@ class BMS_Parser{
  const B_JACKETFILE="STAGEFILE"; // Name of Title Image file.
  const B_BGAFILE="VIDEOFILE"; // Name of BGA video file.
  const B_VOLUME="VOLWAV"; // Sound Volume
+ const B_LNTYPE="LNTYPE"; // Long-note Type (1 = RDM, 2 = MGQ)
 
  const S_RANDOMIZED="RANDOM"; // main directive for randomized score
  
@@ -58,6 +59,7 @@ class BMS_Parser{
  var $mixlevels=array(1 => "BASIC",2 => "NORMAL",3 => "HYPER",4 => "ANOTHER",5 => "INSANE");
  var $play_types=array(1 => "Single",2 => "Two",3 => "Double");
  var $brief_ranks=array(0 => "Very Hard",1 => "Hard",2 => "Normal",3 => "Easy");
+ var $longnote_type=array(1 => "RDM",2 => "MGQ");
  
  // the constructor
  /**
@@ -182,6 +184,11 @@ class BMS_Parser{
    $data["decrank"]=$value; 
    $flagsfound++;
    break;
+   case self::B_LNTYPE:
+   $data["longnote_type"]=$value;
+   $data["longnote_type_text"]=$this->longnote_type[$value];
+   $flagsfound++;
+   break;
    case self::S_RANDOMIZED: // case of randomized score
    $data["randomized"]=true;
    $data["additional_infos"][0x80]="This score is randomized.";
@@ -223,12 +230,6 @@ class BMS_Parser{
    if(($lparameter == "LNOBJ") && (base_convert($lvalue,36,10) >= 1)){
     $isrdm2=true;
     $lnmessage=$lvalue;
-   }elseif($lparameter == "LNTYPE"){
-    switch((int)$lvalue){
-     case 1: $isrdm1=true; break; // RDM Type-1
-     case 2: $ismgq=true; break; // MGQ
-     default: break;
-    }
    }
    $param_id=strstr($parsing,":",true);
    $param_id=ltrim($param_id,"#");
