@@ -1,11 +1,11 @@
 <?php
-// A Be-Music Source(BMS) File Parser for PHP by nandarous (themunyang21 at nate dot com)
-// Version 0.2 (2013.1.2). Last Changed: 2013.8.8
+// A Be-Music Source(BMS) File Parser for PHP by Senarin (themunyang21 at nate dot com)
+// Version 0.2 (2013.1.2). Last Changed: 2015.4.21
 // This code is licensed under GNU Lesser General Public License (GNU LGPL) or a BSD-style licenses.
 // for texts of the license, please see http://www.gnu.org/licenses/lgpl.html
 // This code requires that your webhosting provider must support PHP Version 5.
 // if the host server is what you managing now, please see http://php.net/manual/en/install.php
-// this code supports all variant of Be-Music Source File formats: BMS (the standard), BME (for 7/14 keys like Beatmania IIDX), BML (for 'long-notes' like Ez2DJ), PMS (for Pop'n Music like games).
+// this code supports all variant of Be-Music Source File formats: BMS (the standard), BME (for 7/14 keys like beatmania IIDX), BML (for 'long-notes' like EZ2AC/EZ2DJ), PMS (for Pop'n Music like games).
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
 class BMS_Parser{
