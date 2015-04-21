@@ -9,7 +9,7 @@
 // for the original format specification of BMS files, see http://bm98.yaneu.com/bm98/bmsformat.html
 
 class BMS_Parser{
- const BP_VERSION="0.2.4.6";
+ const BP_VERSION="0.2.4.7";
 
  // Directives for basic information (metadatas)
  const B_PLAYTYPE="PLAYER"; // Play mode
@@ -223,6 +223,12 @@ class BMS_Parser{
    if(($lparameter == "LNOBJ") && (base_convert($lvalue,36,10) >= 1)){
     $isrdm2=true;
     $lnmessage=$lvalue;
+   }elseif($lparameter == "LNTYPE"){
+    switch((int)$lvalue){
+     case 1: $isrdm1=true; break; // RDM Type-1
+     case 2: $ismgq=true; break; // MGQ
+     default: break;
+    }
    }
    $param_id=strstr($parsing,":",true);
    $param_id=ltrim($param_id,"#");
@@ -258,10 +264,10 @@ class BMS_Parser{
         }
        }else{ // All Notes
         if($normalnotes){
-         if($isrdm2 == true && $eachmsg[$i] == $lnmessage){$notes+=0;}
+         if($isrdm2 == true && $eachmsg[$i] == $lnmessage){$notes+=0;} // RDM Type-2
          else{$notes++;}
         }elseif($longnotes){ // for long-notes
-         if($isrdm2 == true && $eachmsg[$i] == $lnmessage){$notes+=0;}
+         if($isrdm2 == true && $eachmsg[$i] == $lnmessage){$notes+=0;} // RDM Type-2
          else{
          if($scheme == 0){$notes+=0.5;}
          elseif($scheme == 1){$notes+=1;}  // for "charge-note" scheme (in beatmania IIDX)
