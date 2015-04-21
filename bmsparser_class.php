@@ -187,6 +187,10 @@ class BMS_Parser{
    case self::B_LNTYPE:
    $data["longnote_type"]=$value;
    $data["longnote_type_text"]=$this->longnote_type[$value];
+   if(!is_numeric($value)){
+    $data["longnote_type"]=0;
+	$data["longnote_type_text"]="N/A";
+   }
    $flagsfound++;
    break;
    case self::S_RANDOMIZED: // case of randomized score
