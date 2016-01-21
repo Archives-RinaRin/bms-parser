@@ -1,7 +1,7 @@
 <?php
 // A Be-Music Source(BMS) File Parser for PHP by Senarin (themunyang21 at nate dot com)
 // Version 0.2 (2013.1.2). Last Changed: 2015.4.22
-// This code is licensed under GNU Lesser General Public License (GNU LGPL) or a BSD-style licenses.
+// This code is licensed under GNU Lesser General Public License (GNU LGPL) or a MIT/BSD-style licenses.
 // for texts of the license, please see http://www.gnu.org/licenses/lgpl.html
 // This code requires that your webhosting provider must support PHP Version 5.
 // if the host server is what you managing now, please see http://php.net/manual/en/install.php
