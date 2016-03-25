@@ -41,7 +41,7 @@ BM98의 제작자인 Urao Yane 님이 작성한 BMS 파일 포맷에 대한 원�
 
 `$(변수 이름)=$class->(메서드 이름)();` 의 형식으로 호출한다.
 
-이 클래스에 대한 문의사항이 있으면 themunyang21@nate.com로 메일을 보내거나 트위터 @Rb_Senarin로 멘션을 보내주시기 바랍니다.
+이 클래스에 대한 문의사항이 있으면 themunyang21@naver.com로 메일을 보내거나 트위터 @Senarin_Anemone로 멘션을 보내주시기 바랍니다.
 
 참고사항:
 ===
